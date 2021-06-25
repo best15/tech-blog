@@ -1,0 +1,29 @@
+<form action="#">
+    <div class="flex flex-col bg-white p-10 rounded-lg shadow space-y-6">
+        <h1 class="font-bold text-xl text-center">Sign in to your account</h1>
+
+        <div class="flex flex-col space-y-1">
+            <input type="text" name="username" id="username"
+                class="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow"
+                placeholder="Username" />
+        </div>
+
+        <div class="flex flex-col space-y-1">
+            <input type="password" name="password" id="password"
+                class="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow"
+                placeholder="Password" />
+        </div>
+
+
+        <div class="flex flex-col-reverse sm:flex-row sm:justify-between items-center">
+
+            <button
+                class="login-btn bg-blue-500 text-white font-bold px-5 py-2 rounded focus:outline-none shadow hover:bg-blue-700 transition-colors">Log
+                In</button>
+
+        </div>
+        <p>No Accounts ? <a href="/signup" class="bg-blue-500 rounded p-1 text-white font-bold"> SIGN UP </a> </p>
+    </div>
+</form>
+
+<script src="../../js/login.js"></script>
