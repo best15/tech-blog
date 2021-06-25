@@ -36,13 +36,12 @@
         <nav>
             <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
                 <li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
-                        href="#">Home</a></li>
+                        href="/">Home</a></li>
                 <li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
-                        href="#">About</a></li>
+                        href="/dashboard">Dashboard</a></li>
                 <li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
                         href="#">Documentation</a></li>
-                <li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 lg:mb-0 mb-2"
-                        href="#">Support</a></li>
+
             </ul>
         </nav>
 
@@ -52,7 +51,11 @@
 </header>
 
 <body>
-    {{{body}}}
+    <div class="relative min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center"
+        style="background-image: url(https://images.unsplash.com/photo-1621243804936-775306a8f2e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80);">
+
+        {{{body}}}
+    </div>
 </body>
 
 </html>

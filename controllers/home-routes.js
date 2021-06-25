@@ -28,4 +28,22 @@ router.get("/", async (req, res) => {
     // }
 });
 
+//Dashboard
+router.get("/dashboard", async (req, res) => {
+
+    res.render("dashboard", {});
+
+});
+
+
+//New post
+router.get("/createpost", async (req, res) => {
+
+    res.render("createpost", {});
+
+});
+
+
+
+
 module.exports = router;

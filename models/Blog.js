@@ -19,7 +19,7 @@ Blog.init(
 
         },
         content: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.TEXT,
             allowNull: false,
 
         },
