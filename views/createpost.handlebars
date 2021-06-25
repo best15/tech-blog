@@ -13,15 +13,16 @@
             <div class="grid grid-cols-1 space-y-2">
                 <label class="text-sm font-bold text-gray-800 tracking-wide">Title</label>
                 <input
-                    class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                    class="post-title text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                     type="" placeholder="">
             </div>
             <div class="grid grid-cols-1 space-y-2">
                 <label class="text-sm font-bold text-gray-800 tracking-wide">Content</label>
                 <div class="flex items-center justify-center w-full">
-                    <label class="flex flex-col rounded-lg border-4 border-solid w-full h-60  group text-center">
-                        <div class="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
-                            <textarea class="content bg-gray-100 sec  h-full w-full border border-gray-300 outline-none"
+                    <label class="flex flex-col rounded-lg border border-gray-300 w-full h-60  group text-center">
+                        <div
+                            class="h-full w-full rounded-lg text-center flex flex-col items-center justify-center items-center  ">
+                            <textarea class="post-content content bg-gray-100 sec  h-full w-full  outline-none"
                                 spellcheck="false" placeholder=""></textarea>
                         </div>
                         <input type="file" class="hidden">
@@ -30,20 +31,13 @@
             </div>
 
             <div class="flex justify-center">
-                <button type="submit"
-                    class="my-5 w-half flex justify-center bg-white text-gray-800 p-4  rounded-full tracking-wide
+                <button
+                    class="post-btn my-5 w-half flex justify-center bg-white text-gray-800 p-4  rounded-full tracking-wide
                                     font-semibold  focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300">
                     Post
                 </button>
             </div>
         </form>
     </div>
-    {{!--
-</div> --}}
 
-{{!-- <style>
-    .has-mask {
-        position: absolute;
-        clip: rect(10px, 150px, 130px, 10px);
-    }
-</style> --}}
+    <script src="../../js/newpost.js"></script>

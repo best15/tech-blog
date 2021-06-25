@@ -43,6 +43,22 @@ router.get("/createpost", async (req, res) => {
 
 });
 
+router.post("/createpost", async (req, res) => {
+    try {
+        const newPost = await Blog.create({
+            title: req.body.postTitle,
+            content: req.body.postContent,
+            date: new Date(),
+            user_id: req.body.user_id,
+
+        });
+        res.status(200).json(newPost);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+
+});
 
 
 
