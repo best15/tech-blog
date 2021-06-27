@@ -3,9 +3,7 @@ const router = require("express").Router();
 const { Blog, User } = require("../models");
 
 router.get("/", async (req, res) => {
-    // if (!req.session.loggedIn) {
-    //   res.redirect("/login");
-    // } else {
+
     try {
         const allPosts = await Blog.findAll({
             order: [["date", "DESC"]],
@@ -25,22 +23,26 @@ router.get("/", async (req, res) => {
         console.log(error);
         res.status(500).json(error);
     }
-    // }
+
 });
 
 //Dashboard
 router.get("/dashboard", async (req, res) => {
-
-    res.render("dashboard", {});
-
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+    } else {
+        res.render("dashboard", {});
+    }
 });
 
 
 //New post
 router.get("/createpost", async (req, res) => {
-
-    res.render("createpost", {});
-
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+    } else {
+        res.render("createpost", {});
+    }
 });
 
 router.post("/createpost", async (req, res) => {
@@ -49,7 +51,7 @@ router.post("/createpost", async (req, res) => {
             title: req.body.postTitle,
             content: req.body.postContent,
             date: new Date(),
-            user_id: req.body.user_id,
+            user_id: req.session.user_id,
 
         });
         res.status(200).json(newPost);
@@ -62,9 +64,11 @@ router.post("/createpost", async (req, res) => {
 
 //Log In
 router.get("/login", async (req, res) => {
-
-    res.render("login", {});
-
+    if (req.session.loggedIn) {
+        res.redirect("/");
+    } else {
+        res.render("login", {});
+    }
 });
 
 //Sign Up

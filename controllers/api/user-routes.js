@@ -11,11 +11,8 @@ router.post('/signup', async (req, res) => {
             password: req.body.password,
         });
 
-        req.session.save(() => {
-            // req.session.loggedIn = true;
+        res.status(200).json(dbUserData);
 
-            res.status(200).json(dbUserData);
-        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -49,10 +46,11 @@ router.post('/login', async (req, res) => {
                 .json({ message: 'Incorrect username or password. Please try again!' });
             return;
         }
-
+        const user = dbUserData.get({ plain: true });
         req.session.save(() => {
-            // req.session.loggedIn = true;
-
+            req.session.loggedIn = true;
+            req.session.user_id = user.id;
+            // req.session.user_id = user.username;
             res
                 .status(200)
                 .json({ user: dbUserData, message: 'You are now logged in!' });
@@ -63,4 +61,15 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Logout
+router.post("/logout", (req, res) => {
+    console.log("session:", req.session.loggedIn)
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
+});
 module.exports = router;

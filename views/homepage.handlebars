@@ -1,5 +1,15 @@
 <div class="px-4 py-2 max-w-4xl">
+    {{#if posts}}
     {{#each posts as |post|}}
     {{> postCard}}
     {{/each}}
+    {{else}}
+    <div class="flex  items-center justify-center">
+        <button
+            class=" my-5 w-full flex items-center justify-center bg-indigo-500 text-gray-100 p-4  rounded-full tracking-wide
+                                    font-semibold  focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg  transition ease-in duration-300">
+            No Posts
+        </button>
+    </div>
+    {{/if}}
 </div>
