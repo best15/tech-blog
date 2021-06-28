@@ -31,7 +31,23 @@ router.get("/dashboard", async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect("/login");
     } else {
-        res.render("dashboard", {});
+        try {
+            console.log(req.session.user_id);
+            const myPosts = await Blog.findAll({
+                where: { user_id: req.session.user_id },
+                order: [["date", "DESC"]],
+
+            });
+
+            const posts = myPosts.map((post) => post.get({ plain: true }));
+
+            res.render("dashboard", { posts });
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+
     }
 });
 

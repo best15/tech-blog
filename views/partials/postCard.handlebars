@@ -1,6 +1,11 @@
 <div class=" bg-white w-full  rounded-lg mx-auto my-6 p-16 bg-indigo-400">
-    <h1 class="text-2xl font-medium mb-2">{{title}}</h1>
-    <p class="font-medium text-sm  mb-4  ">
+    <div class="flex flex-row items-center">
+        <h1 class=" w-full text-2xl font-medium mb-2">{{title}}</h1>
+        <div class="w-full flex justify-end ">
+            <p class=" text-sm font-medium">{{format_date date}}</p>
+        </div>
+    </div>
+    <p class="  text-sm  mb-4  ">
         {{content}}
     </p>
 </div>
