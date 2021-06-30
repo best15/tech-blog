@@ -19,7 +19,11 @@ router.get("/", async (req, res) => {
 
         const posts = allPosts.map((post) => post.get({ plain: true }));
 
-        res.render("homepage", { posts });
+        res.render("homepage", {
+            posts,
+            loggedIn: req.session.loggedIn,
+            username: req.session.username,
+        });
 
     } catch (error) {
         console.log(error);
@@ -103,7 +107,12 @@ router.get("/dashboard", async (req, res) => {
 
             const posts = myPosts.map((post) => post.get({ plain: true }));
 
-            res.render("dashboard", { posts });
+            res.render("dashboard", {
+                posts,
+                loggedIn: req.session.loggedIn,
+                username: req.session.username,
+                dashboard: true,
+            });
 
         } catch (error) {
             console.log(error);
