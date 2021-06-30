@@ -1,7 +1,7 @@
 <li>
-    <div class=" bg-white w-2/3  rounded-lg mx-auto my-6 p-5 bg-green-300">
+    <div class=" data-postid= bg-white w-2/3  rounded-lg mx-auto my-6 p-5 bg-green-300">
 
-        <div class="flex flex-row items-center">
+        <div class=" flex flex-row items-center">
             <h1 class=" w-full text-2xl font-medium mb-2">{{title}}</h1>
             <div class="w-full flex justify-end ">
                 <p class=" text-sm font-medium">Posted on {{format_date date}}</p>
@@ -16,11 +16,12 @@
                 Edit Post
             </button>
         </a>
-        <a href="/dashboard/deletepost/{{id}}"> <button
-                class="deletepost-btn my-5 w-half  bg-red-300 text-gray-100 p-4  rounded-full tracking-wide
+        <a href=""> <button
+                class="deletepost-btn  my-5 w-half  bg-red-300 text-gray-100 p-4  rounded-full tracking-wide
                                     font-semibold  focus:outline-none focus:shadow-outline hover:bg-red-600 shadow-lg cursor-pointer transition ease-in duration-300">
                 Delete Post
             </button>
         </a>
+        <p class="postid hidden">{{id}}</p>
     </div>
 </li>

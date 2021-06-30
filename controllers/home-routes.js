@@ -56,7 +56,11 @@ router.get("/post/:id", async (req, res) => {
             const post = posts.get({ plain: true });
 
 
-            res.render("posts", { post });
+            res.render("posts", {
+                post,
+                loggedIn: req.session.loggedIn,
+                username: req.session.username,
+            });
         } catch (error) {
             console.log(error);
             res.status(500).json(error);
@@ -122,19 +126,15 @@ router.get("/dashboard", async (req, res) => {
 
 
 //Delete posts
-router.post("/dashboard/deletepost/:id", async (req, res) => {
+router.delete("/dashboard/deletepost", async (req, res) => {
     try {
         await Blog.destroy({
             where: {
-                id: req.params.id,
+                id: req.body.postid,
             }
         });
-        res.status(200);
-        res.redirect("/dashboard", {
-            post,
-            loggedIn: req.session.loggedIn,
-            username: req.session.username,
-        });
+        res.status(200).send('Post Deleted');
+        res.redirect("/dashboard");
 
     } catch (error) {
         console.log(error);
@@ -180,8 +180,8 @@ router.get("/dashboard/updatepost/:id", async (req, res) => {
 });
 
 //Update post
-router.post("/dashboard/updatepost/:id", async (req, res) => {
-    console.log("req.params.id-----------", req.params.id, req.updatedTitle);
+router.put("/dashboard/updatepost/:id", async (req, res) => {
+
     try {
         const posts = await Blog.update({ title: req.body.updatedTitle, content: req.body.updatedContent },
             {
@@ -205,7 +205,7 @@ router.get("/createpost", async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect("/login");
     } else {
-        res.render("createpost", {});
+        res.render("createpost",);
     }
 });
 
