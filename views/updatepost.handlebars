@@ -1,16 +1,16 @@
 <div class="sm:max-w-lg w-full p-10 bg-green-300 rounded-xl z-10">
     <div class="text-center">
         <h2 class="mt-5 text-3xl font-bold text-gray-900">
-            Create New Post
+            Update Post
         </h2>
 
     </div>
     <form class="mt-8 space-y-3">
         <div class="grid grid-cols-1 space-y-2">
             <label class="text-sm font-bold text-gray-800 tracking-wide">Title</label>
-            <input
+            <textarea
                 class="post-title text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
-                type="" placeholder="">
+                type="" placeholder="">{{post.title}}</textarea>
         </div>
         <div class="grid grid-cols-1 space-y-2">
             <label class="text-sm font-bold text-gray-800 tracking-wide">Content</label>
@@ -18,22 +18,22 @@
                 <label class="flex flex-col rounded-lg border border-gray-300 w-full h-60  group text-center">
                     <div
                         class="h-full w-full rounded-lg text-center flex flex-col items-center justify-center items-center  ">
-                        <textarea class="post-content content bg-gray-100 sec  h-full w-full  outline-none"
-                            spellcheck="false" placeholder=""></textarea>
+                        <textarea class="post-content  p-5 bg-gray-100 sec  h-full w-full  outline-none"
+                            spellcheck="false" placeholder="">{{post.content}}</textarea>
                     </div>
-                    <input type="file" class="hidden">
+
                 </label>
             </div>
         </div>
 
         <div class="flex justify-center">
             <button
-                class="post-btn my-5 w-half flex justify-center bg-white text-gray-800 p-4  rounded-full tracking-wide
-                                    font-semibold  focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300">
-                Post
+                class="update-btn my-5 w-half flex justify-center bg-indigo-300 text-gray-800 p-4  rounded-full tracking-wide
+                                    font-semibold  focus:outline-none focus:shadow-outline hover:bg-green-300 shadow-lg cursor-pointer transition ease-in duration-300">
+                Update
             </button>
         </div>
     </form>
 </div>
 
-<script src="../../js/newpost.js"></script>
+<script src="../../js/update.js"></script>

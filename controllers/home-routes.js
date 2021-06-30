@@ -55,8 +55,6 @@ router.get("/post/:id", async (req, res) => {
             });
             const post = posts.get({ plain: true });
 
-            console.log(post);
-
 
             res.render("posts", { post });
         } catch (error) {
@@ -66,7 +64,7 @@ router.get("/post/:id", async (req, res) => {
     }
 });
 
-//Handles comments posted on specific post
+//Create comments on a specific post
 router.post("/post/:id", async (req, res) => {
 
     try {
@@ -123,7 +121,86 @@ router.get("/dashboard", async (req, res) => {
 });
 
 
-//New post
+//Delete posts
+router.post("/dashboard/deletepost/:id", async (req, res) => {
+    try {
+        await Blog.destroy({
+            where: {
+                id: req.params.id,
+            }
+        });
+        res.status(200);
+        res.redirect("/dashboard", {
+            post,
+            loggedIn: req.session.loggedIn,
+            username: req.session.username,
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+});
+
+
+//Update page from Dashboard
+router.get("/dashboard/updatepost/:id", async (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+    } else {
+        try {
+            const posts = await Blog.findByPk(req.params.id, {
+                order: [["date", "DESC"]],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['username'],
+                    },
+                    {
+                        model: Comment,
+
+                    },
+                ],
+            });
+
+            const post = posts.get({ plain: true });
+
+            res.render("updatepost", {
+                post,
+                loggedIn: req.session.loggedIn,
+                username: req.session.username,
+            });
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+
+    }
+});
+
+//Update post
+router.post("/dashboard/updatepost/:id", async (req, res) => {
+    console.log("req.params.id-----------", req.params.id, req.updatedTitle);
+    try {
+        const posts = await Blog.update({ title: req.body.updatedTitle, content: req.body.updatedContent },
+            {
+                where: {
+                    id: req.params.id,
+                },
+
+            });
+
+        res.status(200).json(req.params.id);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+
+});
+
+//Create New post screen
 router.get("/createpost", async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect("/login");
@@ -132,6 +209,7 @@ router.get("/createpost", async (req, res) => {
     }
 });
 
+// Create New post in Blog table
 router.post("/createpost", async (req, res) => {
     try {
         const newPost = await Blog.create({

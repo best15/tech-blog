@@ -16,7 +16,7 @@ async function postNewBlog() {
 
     if (response.ok) {
         alert("Blog posted successfully!!");
-        document.location.replace("/");
+        document.location.replace("/dashboard");
     } else {
         alert("Failed to sign up.");
     }
