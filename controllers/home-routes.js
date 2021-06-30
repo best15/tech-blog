@@ -1,18 +1,20 @@
 const router = require("express").Router();
 
-const { Blog, User } = require("../models");
+const { Blog, User, Comment } = require("../models");
 
+
+//homepage
 router.get("/", async (req, res) => {
 
     try {
         const allPosts = await Blog.findAll({
             order: [["date", "DESC"]],
-            // include: [
-            //     {
-            //         model: User,
-            //         attributes: ["first_name", "last_name", "email"],
-            //     },
-            // ],
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+            ],
         });
 
         const posts = allPosts.map((post) => post.get({ plain: true }));
@@ -26,6 +28,65 @@ router.get("/", async (req, res) => {
 
 });
 
+
+//get post by id
+router.get("/post/:id", async (req, res) => {
+
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+    } else {
+        try {
+            const posts = await Blog.findByPk(req.params.id, {
+                include: [
+                    {
+                        model: User,
+                        attributes: ['username'],
+                    },
+                    {
+                        model: Comment,
+
+                    },
+
+                ],
+            });
+            const post = posts.get({ plain: true });
+
+            console.log(post);
+
+
+            res.render("posts", { post });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+    }
+});
+
+//Handles comments posted on specific post
+router.post("/post/:id", async (req, res) => {
+
+    try {
+        console.log("postcomments:", req.params.id);
+
+        const dbUserComments = await Comment.create({
+            content: req.body.usercomments,
+            date: new Date(),
+            username: req.session.username,
+            blog_id: req.params.id,
+            user_id: req.session.user_id,
+
+        });
+
+        res.status(200).json(dbUserComments);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+
+});
+
+
 //Dashboard
 router.get("/dashboard", async (req, res) => {
     if (!req.session.loggedIn) {
@@ -36,6 +97,7 @@ router.get("/dashboard", async (req, res) => {
             const myPosts = await Blog.findAll({
                 where: { user_id: req.session.user_id },
                 order: [["date", "DESC"]],
+
 
             });
 
