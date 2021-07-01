@@ -23,6 +23,7 @@ router.get("/", async (req, res) => {
             posts,
             loggedIn: req.session.loggedIn,
             username: req.session.username,
+            homepage: true,
         });
 
     } catch (error) {
@@ -113,7 +114,7 @@ router.get("/dashboard", async (req, res) => {
                 posts,
                 loggedIn: req.session.loggedIn,
                 username: req.session.username,
-                dashboard: true,
+
             });
 
         } catch (error) {
@@ -205,7 +206,10 @@ router.get("/createpost", async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect("/login");
     } else {
-        res.render("createpost",);
+        res.render("createpost", {
+            loggedIn: req.session.loggedIn,
+            username: req.session.username,
+        });
     }
 });
 
