@@ -1,15 +1,17 @@
 // const newPost = document.querySelector('.newpost-btn').value.trim();
 // const editPost = document.querySelector('.editpost-btn').value.trim();
-const postid = document.querySelector('.postid').innerHTML.trim();
+
 
 
 document
     .querySelector('.newpost-btn')
     .addEventListener('click', createNewPost);
 
-document
-    .querySelector('.deletepost-btn')
-    .addEventListener('click', deletepost);
+if (document.querySelector(".deletepost-btn") != null) {
+    document
+        .querySelector('.deletepost-btn')
+        .addEventListener('click', deletepost);
+}
 
 function createNewPost() {
     document.location.replace('/createpost');
@@ -17,6 +19,7 @@ function createNewPost() {
 
 async function deletepost(event) {
     event.preventDefault();
+    const postid = document.querySelector('.postid').innerHTML.trim();
 
     const response = await fetch("/dashboard/deletepost", {
         method: "DELETE",
