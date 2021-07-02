@@ -20,7 +20,7 @@ function createNewPost() {
 async function deletepost(event) {
     event.preventDefault();
     const postid = document.querySelector('.postid').innerHTML.trim();
-
+    console.log(postid);
     const response = await fetch("/dashboard/deletepost", {
         method: "DELETE",
         body: JSON.stringify({ postid }),

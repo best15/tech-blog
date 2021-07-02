@@ -61,6 +61,7 @@ router.get("/post/:id", async (req, res) => {
                 post,
                 loggedIn: req.session.loggedIn,
                 username: req.session.username,
+                homepage: true,
             });
         } catch (error) {
             console.log(error);
@@ -135,7 +136,7 @@ router.delete("/dashboard/deletepost", async (req, res) => {
             }
         });
         res.status(200).send('Post Deleted');
-        res.redirect("/dashboard");
+
 
     } catch (error) {
         console.log(error);
@@ -223,7 +224,8 @@ router.post("/createpost", async (req, res) => {
             user_id: req.session.user_id,
 
         });
-        res.status(200).json(newPost);
+        res.status(200).send("Post created");
+
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
@@ -236,14 +238,14 @@ router.get("/login", async (req, res) => {
     if (req.session.loggedIn) {
         res.redirect("/");
     } else {
-        res.render("login", {});
+        res.render("login", { homepage: true, });
     }
 });
 
 //Sign Up
 router.get("/signup", async (req, res) => {
 
-    res.render("signup", {});
+    res.render("signup", { homepage: true, });
 
 });
 

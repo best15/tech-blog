@@ -15,9 +15,9 @@ async function postNewBlog() {
     });
 
     if (response.ok) {
-        alert("Blog posted successfully!!");
+        alert("Post created successfully!!");
         document.location.replace("/dashboard");
     } else {
-        alert("Failed to sign up.");
+        alert("Failed to create mew post.");
     }
 }
